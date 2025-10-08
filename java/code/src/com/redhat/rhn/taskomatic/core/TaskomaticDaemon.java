@@ -152,7 +152,7 @@ public class TaskomaticDaemon {
                 try {
                     kernel.startup();
                 }
-                catch (Throwable e) {
+                catch (Exception e) {
                     LOG.fatal(e.getMessage());
                     LOG.fatal(ExceptionUtils.getStackTrace(e));
                     System.exit(-1);
@@ -161,8 +161,8 @@ public class TaskomaticDaemon {
             Thread t = new Thread(r);
             t.start();
         }
-        catch (Throwable t) {
-            LOG.fatal("Fatal error starting Taskomatic", t);
+        catch (Exception e) {
+            LOG.fatal("Fatal error starting Taskomatic", e);
             System.exit(-1);
         }
         return retval;

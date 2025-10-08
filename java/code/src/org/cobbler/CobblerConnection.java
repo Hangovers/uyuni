@@ -163,7 +163,7 @@ public class CobblerConnection {
         try {
             retval = client.invoke(procedureName, args);
         }
-        catch (Throwable e) {
+        catch (Exception e) {
             throw new XmlRpcException("XmlRpcException calling cobbler.", e);
         }
         return retval;

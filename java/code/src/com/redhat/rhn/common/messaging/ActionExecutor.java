@@ -68,8 +68,12 @@ class ActionExecutor implements Runnable {
                     action.execute(msg);
                 }
             }
-            catch (Throwable t) {
-                LOG.error(t);
+            catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                LOG.error("Process was interrupted", e);
+            }
+            catch (Exception e) {
+                LOG.error(e);
             }
         }
     }

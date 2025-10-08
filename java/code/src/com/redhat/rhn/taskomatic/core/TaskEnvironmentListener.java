@@ -60,8 +60,8 @@ public class TaskEnvironmentListener implements TriggerListener {
                     this.vetoedJobs.put(ctx.hashCode(), Boolean.TRUE);
                 }
             }
-            catch (Throwable t) {
-                logger.error(t.getLocalizedMessage(), t);
+            catch (Exception e) {
+                logger.error(e.getLocalizedMessage(), e);
                 this.vetoedJobs.put(ctx.hashCode(), Boolean.TRUE);
             }
         }
