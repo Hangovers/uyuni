@@ -18,6 +18,7 @@ import com.redhat.rhn.common.hibernate.HibernateFactory;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.quartz.JobExecutionContext;
 import org.quartz.Trigger;
 import org.quartz.Trigger.CompletedExecutionInstruction;
@@ -60,7 +61,11 @@ public class TaskEnvironmentListener implements TriggerListener {
                     this.vetoedJobs.put(ctx.hashCode(), Boolean.TRUE);
                 }
             }
-            catch (Exception e) {
+            catch (HibernateException e) {
+                logger.error(e.getLocalizedMessage(), e);
+                this.vetoedJobs.put(ctx.hashCode(), Boolean.TRUE);
+            }
+            catch (RuntimeException e) {
                 logger.error(e.getLocalizedMessage(), e);
                 this.vetoedJobs.put(ctx.hashCode(), Boolean.TRUE);
             }

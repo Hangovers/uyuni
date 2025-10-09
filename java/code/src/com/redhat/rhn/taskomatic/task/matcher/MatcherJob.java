@@ -78,7 +78,15 @@ public class MatcherJob extends RhnJavaJob {
             String sep = Config.get().getString(CSV_SEPARATOR, ",");
             new MatcherRunner().run(sep);
         }
-        catch (Exception e) {
+        catch (SecurityException e) {
+            log.error("Not permitted to execute subscription-matcher", e);
+            HibernateFactory.rollbackTransaction();
+        }
+        catch (IllegalStateException e) {
+            log.error(e.getMessage(), e);
+            HibernateFactory.rollbackTransaction();
+        }
+        catch (RuntimeException e) {
             log.error(e.getMessage(), e);
             HibernateFactory.rollbackTransaction();
         }

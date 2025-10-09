@@ -68,7 +68,10 @@ public class AlignSoftwareTargetAction implements MessageAction {
             target.setStatus(Status.GENERATING_REPODATA);
             LOG.info("Finished aligning {} in {}", msg, Duration.between(start, Instant.now()));
         }
-        catch (Exception e) {
+        catch (PermissionException | EntityNotExistsException e) {
+            throw new AlignSoftwareTargetException(target, e);
+        }
+        catch (RuntimeException e) {
             throw new AlignSoftwareTargetException(target, e);
         }
     }

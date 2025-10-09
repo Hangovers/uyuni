@@ -604,7 +604,7 @@ public class ActionChainFactoryTest extends BaseTestCaseWithUser {
         catch (ObjectNotFoundException onfe) {
             return;
         }
-        catch (Exception e) {
+        catch (RuntimeException e) {
             fail();
         }
 

@@ -93,7 +93,7 @@ public class MessageQueueThreadPool extends ThreadPoolExecutor {
                 TraceBackAction tba = new TraceBackAction();
                 tba.execute(evt);
             }
-            catch (Exception e) {
+            catch (RuntimeException e) {
                 log.error("Error sending traceback email, logging for posterity.", e);
             }
         }
